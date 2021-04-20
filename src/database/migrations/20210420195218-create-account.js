@@ -2,34 +2,46 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('account', { 
+    await queryInterface.createTable('bank_account', { 
       id: {
-        value: Sequelize.INTEGER,
+        type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'users', key: 'id' },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      },
       number_card: {
-        value: Sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       validate_date: {
-        value: Sequelize.DATE,
-        set: () => {
-          if(this.validate_date === null) this.validate_date = new Date();
-        }
+        type: Sequelize.DATE,
+        allowNull: false
       },
       verify_nuber: {
-        value: Sequelize.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
-      name: {
-        value: Sequelize.STRING,
+      cardholder: {
+        type: Sequelize.STRING,
         allowNull: false
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('account');
+    await queryInterface.dropTable('bank_account');
   }
 };

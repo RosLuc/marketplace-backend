@@ -4,37 +4,48 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('address', { 
       id: {
-        value: Sequelize.INTEGER,
+        type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'users', key: 'id' },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      },
       uf: {
-        value: Sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       cep: {
-        value: Sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       address: {
-        value: Sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
-      comp: {
-        value: Sequelize.STRING,
-        allowNull: false
-      },
+      comp: Sequelize.STRING,
       district: {
-        value: Sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       number: {
-        value: Sequelize.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       city: {
-        value: Sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: false
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },
