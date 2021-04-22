@@ -1,13 +1,13 @@
-const Users = require('../model/Users');
-
+const Address = require('../model/Address');
+const Users = require('../model/Address');
 
 module.exports = {
     async create(req, res) {
         const data = req.body;
         try {
-            const user = await Users.create(data);
+            const address = await Address.create(data);
 
-            return res.json(user);
+            return res.json(address);
         } catch (error) {
             return res.status(400).json({ error: error.mensage });
         }
@@ -42,6 +42,4 @@ module.exports = {
             return res.status(400).json({ error: error.mensage });
         }
     },
-
-
 };

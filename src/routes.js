@@ -7,6 +7,7 @@ const userValidator = require("./validators/userValidator");
 
 const routes = express.Router();
 
+routes.get('/', userController.index);
 routes.post('/user', validate(userValidator.CreateBody, {}, {}), userController.create);
 
 module.exports = routes;
