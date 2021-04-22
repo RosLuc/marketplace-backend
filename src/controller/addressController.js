@@ -1,7 +1,11 @@
 const Address = require('../model/Address');
-const Users = require('../model/Address');
+const {Router} = require('express');
+
 
 module.exports = {
+    
+    
+    
     async create(req, res) {
         const data = req.body;
         try {
@@ -25,7 +29,8 @@ module.exports = {
 
     async index(req, res) {
         const data = req.body;
-
+        res.json({id});
+        console.log("estamos no get");
         try {
 
         } catch (error) {
