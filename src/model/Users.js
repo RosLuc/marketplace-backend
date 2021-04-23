@@ -17,6 +17,10 @@ class Users extends Model {
                     const hash = await bcrypt.hash(users.password, 10)
                     users.password = hash;
                 },
+                beforeUpdate: async(users, options) => {
+                    const hash = await bcrypt.hash(users.password, 10)
+                    users.password = hash;
+                },
             }
         });
     };
