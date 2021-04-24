@@ -1,57 +1,59 @@
 const Address = require('../model/Address');
+const Users = require('../model/Users');
 const {Router} = require('express');
 const { Op } = require('sequelize');
 
 
-async function verifiqueCep(cep, props = {}) {
-    const address = await Address.findOne({
-        where: {
-            cep,
-            ...props
-        }
-    });
 
-    if (address) throw new Error("Email alredy exist");
-}
 
 module.exports = {
     
+    async index(req, res) {
+        const { user_id } = req.params;
+    
+        const user = await User.findByPk(user_id, {
+          include: { association: 'addresses' }
+        });
+    
+        return res.json(user.Address);
+      },
+    
+    async store(req, res){
+        const {user_id} = req.params;
+        const {uf,cep, address,comp,district,number,city} = req.body;
 
-    async create(req, res) {
-        
-         try {
-            const data = req.body;
-            await verifiqueCep(data.cep);
-            const address = await Address.create(data);
+        const user = await Users.findByPk(user_id);
 
-            return res.json(address);
-        } catch (error) {
-            return res.status(400).json({ error: error.mensage });
+        if(!user){
+            return res.status(400).json({ error: 'User not found!' });
         }
-        
+
+        const addres = await Address.create({
+            user_id,
+            uf,
+            cep,
+            address,
+            comp,
+            district,
+            number,
+            city
+
+        });
+        return res.json(addres);
+    
     },
+    
 
     async update(req, res) {
         const data = req.body;
-
+        const user_id = req.params;
         try {
-
-        } catch (error) {
-            return res.status(400).json({ error: error.mensage });
-        }
-    },
-
-    async index(req, res) {
-     
-        const { user_id } = req.params;
-        try {
-            const user = await Address.findByPk(user_id, {
-                attributes: {
-                    exclude: ['uf']
-                }
-            });
+            const user = await Users.findByPk(user_id);
 
             if(!user) return res.status(404).json({ error: "User not found" });
+    
+
+            await user.update(data);
 
             return res.json(user);
         } catch (error) {
@@ -59,13 +61,19 @@ module.exports = {
         }
     },
 
+    
     async delete(req, res) {
-        const data = req.body;
-
+        const  user_id  = req.params;
         try {
+            const user = await Users.findByPk(user_id);
 
+            if(!user) return res.status(404).json({ error: "User not found" });
+
+            await user.destroy();
+
+            return res.json({});
         } catch (error) {
-            return res.status(400).json({ error: error.mensage });
+            return res.status(400).json({ error: error.message });
         }
     },
 };

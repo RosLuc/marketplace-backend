@@ -10,13 +10,13 @@ const routes = express.Router();
 //Users Routes
 routes.post('/user', userValidator.CreateBody, userController.create);
 routes.put('/user/:user_id', userValidator.UpdateBody, userController.update);
-routes.get('/user/:user_id', userController.view);
+routes.get('/user/ver', userController.view);
 routes.delete('/user/:user_id', userController.delete);
 
 
 //Address Routes
 routes.get('/address', addressController.index);
-routes.post('/address/b', addressController.create);
+routes.post('/address/b', addressController.store);
 routes.delete('/address/bbb', addressController.delete);
 
 

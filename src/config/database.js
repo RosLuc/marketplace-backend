@@ -2,10 +2,10 @@ require('dotenv/config');
 
 const development = {
   dialect: 'postgres',
-  host: process.env.HOST,
-  username: process.env.NAME,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE,
+  host: 'localhost',
+  username: 'postgres',
+  password: '123',
+  database: 'sqlnode',
   define: {
     timestamps: true,
     underscored: true,
