@@ -16,8 +16,8 @@ routes.delete('/user/:user_id', userController.delete);
 
 //Address Routes
 routes.get('/address', addressController.index);
-routes.post('/address', addressController.create);
-routes.delete('/address', addressController.delete);
+routes.post('/address/b', addressController.create);
+routes.delete('/address/bbb', addressController.delete);
 
 
 module.exports = routes;
