@@ -98,4 +98,23 @@ module.exports = {
             return res.status(400).json({ error: error.message });
         }
     },
+
+    async list(req, res) {
+        try {
+            const users = await Users.findAll({
+                attributes: {
+                    exclude: ["password"]
+                },
+                include: [
+                    { association: 'Addresses' },
+                    { association: 'BankAccounts' }
+                ]
+            });
+
+            return res.json(users);
+        } catch (error) {
+            console.log(error);
+            return res.status(400).json({ error: error.message });
+        }
+    }
 };

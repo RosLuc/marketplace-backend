@@ -11,6 +11,7 @@ class Users extends Model {
       password: DataTypes.STRING,
       birth_date: DataTypes.DATE,
     }, {
+      tableName: "users",
       sequelize,
       hooks: {
         beforeCreate: async (users, options) => {
@@ -27,7 +28,7 @@ class Users extends Model {
 
   static associate(models) {
     this.hasMany(models.BankAccount, { foreignKey: "user_id", as: "BankAccounts" });
-    this.hasMany(models.Address, { foreignKey: "user_id", as: "Address" });
+    this.hasMany(models.Address, { foreignKey: "user_id", as: "Addresses" });
   };
 };
 

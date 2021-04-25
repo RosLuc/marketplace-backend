@@ -9,7 +9,7 @@ module.exports = {
     const { user_id } = req.params;
 
     const user = await User.findByPk(user_id, {
-      include: { association: 'addresses' }
+      include: { association: 'Addresses' }
     });
 
     return res.json(user.BanckAcount);

@@ -8,6 +8,7 @@ class BankAccount extends Model{
       verify_nuber: DataTypes.INTEGER,
       cardholder: DataTypes.STRING,
     }, {
+      tableName: "bank_account",
       sequelize
     });
   };

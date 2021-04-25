@@ -11,9 +11,9 @@ function loadModels(connection) {
 
   console.log('Carregando associações');
 
+  Users.associate(connection.models);
   Address.associate(connection.models);
   BankAccount.associate(connection.models);
-  Users.associate(connection.models);
 }
 
 module.exports = loadModels;

@@ -11,6 +11,7 @@ class Address extends Model{
       number: DataTypes.INTEGER,
       city: DataTypes.STRING,
     }, {
+      tableName: "address",
       sequelize
     });
   };
