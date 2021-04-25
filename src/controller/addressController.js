@@ -1,9 +1,6 @@
 const Address = require('../model/Address');
 const Users = require('../model/Users');
-const {Router} = require('express');
 const { Op } = require('sequelize');
-
-
 
 
 module.exports = {

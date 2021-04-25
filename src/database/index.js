@@ -13,12 +13,4 @@ const connection = new Sequelize(config);
 
 loadModels(connection);
 
-User.init(connection);
-Address.init(connection);
-Banck.init(connection);
-
-User.associate(connection.models);
-Address.associate(connection.models);
-Banck.associate(connection.models);
-
 module.exports = connection;
