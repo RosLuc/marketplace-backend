@@ -5,7 +5,7 @@ class BankAccount extends Model{
     super.init({
       number_card: DataTypes.STRING,
       validate_date: DataTypes.DATE,
-      verify_nuber: DataTypes.INTEGER,
+      verify_number: DataTypes.INTEGER,
       cardholder: DataTypes.STRING,
     }, {
       tableName: "bank_account",
