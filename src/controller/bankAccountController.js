@@ -1,7 +1,5 @@
-const BanckAcount = require('../model/BankAccount');
-const Users = require('../model/Users');
-const { Op } = require('sequelize');
 const BankAccount = require('../model/BankAccount');
+const Users = require('../model/Users');
 
 module.exports = {
 
@@ -18,7 +16,7 @@ module.exports = {
 
       if (!user) return res.status(404).json({ error: "User not found" });
 
-      const bankAccount = await BanckAcount.create({
+      const bankAccount = await BankAccount.create({
         user_id,
         ...data
       });
@@ -61,7 +59,7 @@ module.exports = {
   async delete(req, res) {
     const { account_id } = req.params;
     try {
-      const bankAccount = await BanckAcount.findByPk(account_id);
+      const bankAccount = await BankAccount.findByPk(account_id);
 
       if (!bankAccount) return res.status(404).json({ error: "Bank account not found" });
 
@@ -77,7 +75,7 @@ module.exports = {
     const { user_id } = req.params
 
     try {
-      const bankAccounts = await BanckAcount.findAll({
+      const bankAccounts = await BankAccount.findAll({
         where: {
           user_id
         }

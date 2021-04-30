@@ -1,77 +1,90 @@
 const Address = require('../model/Address');
 const Users = require('../model/Users');
-const { Op } = require('sequelize');
-
 
 module.exports = {
-  async index(req, res) {
-    const { user_id } = req.params;
 
-    const user = await User.findByPk(user_id, {
-      include: { association: 'Addresses' }
-    });
-
-    return res.json(user.Address);
-  },
-
-  async store(req, res) {
-    const { user_id } = req.params;
-    const { uf, cep, address, comp, district, number, city } = req.body;
+  async create(req, res) {
+    const data = req.body;
+    const { user_id } = data;
 
     try {
-      const user = await Users.findByPk(user_id);
-
-      if (!user) {
-        return res.status(404).json({ error: 'User not found!' });
-      }
-
-      const addres = await Address.create({
-        user_id,
-        uf,
-        cep,
-        address,
-        comp,
-        district,
-        number,
-        city
+      const user = await Users.findByPk(user_id, {
+        attributes: {
+          exclude: ['password']
+        }
       });
-      return res.json(addres);
+
+      if (!user) return res.status(404).json({ error: "User not found" });
+
+      const address = await Address.create({
+        user_id,
+        ...data
+      });
+
+      return res.json(address);
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
   },
-
 
   async update(req, res) {
     const data = req.body;
-    const user_id = req.params;
+    const { address_id } = req.params;
     try {
-      const user = await Users.findByPk(user_id);
+      const address = await Address.findByPk(address_id);
 
-      if (!user) return res.status(404).json({ error: "User not found" });
+      if (!address) return res.status(404).json({ error: "Address not found" });
 
+      await address.update(data);
 
-      await user.update(data);
-
-      return res.json(user);
+      return res.json(address);
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
   },
 
+  async view(req, res) {
+    const { address_id } = req.params;
+    try {
+      const address = await Address.findByPk(address_id);
+
+      if (!address) return res.status(404).json({ error: "Address not found" });
+
+      return res.json(address);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
 
   async delete(req, res) {
-    const user_id = req.params;
+    const { address_id } = req.params;
     try {
-      const user = await Users.findByPk(user_id);
+      const address = await Address.findByPk(address_id);
 
-      if (!user) return res.status(404).json({ error: "User not found" });
+      if (!address) return res.status(404).json({ error: "Address not found" });
 
-      await user.destroy();
+      await address.destroy();
 
       return res.json({});
     } catch (error) {
       return res.status(400).json({ error: error.message });
     }
   },
-};
+
+  async list(req, res) {
+    const { user_id } = req.params
+
+    try {
+      const address = await Address.findAll({
+        where: {
+          user_id
+        }
+      });
+
+      return res.json(address);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ error: error.message });
+    }
+  }
+}
