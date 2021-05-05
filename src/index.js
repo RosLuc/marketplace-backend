@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const routes = require('./routes');
 const error = require('./config/errorHandler');
+require("dotenv/config");
 
 require('./database/index');
 
@@ -12,6 +13,8 @@ app.use(express.json());
 app.use(routes);
 app.use(error);
 
-app.listen(3333, () => {
-    console.log("Escutando porta 3333");
+const port = process.env.PORT || 3333;
+
+app.listen(port, () => {
+    console.log(`Escutando porta ${port}`);
 });
