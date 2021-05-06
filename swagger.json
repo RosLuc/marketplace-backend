@@ -1,0 +1,79 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "MarketPlace"
+  },
+  "host": "app-market-place.herokuapp.com",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Operations about user"
+    },
+    {
+      "name": "Addresses",
+      "description": "Operations about address"
+    },
+    {
+      "name": "Bank Account",
+      "description": "Operations about bank account"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Cadastrar usuário",
+        "description": "Cadastra um novo usuário",
+        "responses": {
+          "200": {
+            "description": "Cadastro realizado com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          }
+        }
+      }
+    },
+    "/user/:user_id": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Atualizar usuário",
+        "description": "Atualiza um usuário",
+        "responses": {
+          "200": {
+            "description": "Atualização realizada com sucesso"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Atualizar usuário",
+        "description": "Atualiza um usuário",
+        "responses": {
+          "200": {
+            "description": "Atualização realizada com sucesso"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Atualizar usuário",
+        "description": "Atualiza um usuário",
+        "responses": {
+          "200": {
+            "description": "Atualização realizada com sucesso"
+          }
+        }
+      }
+    }
+  }
+}
