@@ -15,7 +15,7 @@
       "description": "Operações referentes ao endereço."
     },
     {
-      "name": "Bank Account",
+      "name": "Credit Card",
       "description": "Operações referentes aos cartões de credito"
     }
   ],
@@ -38,7 +38,11 @@
             "schema": {
               "type": "object",
               "required": [
-                "userName"
+                "first_name",
+                "cpf",
+                "email",
+                "password",
+                "confirm_password"
               ],
               "properties": {
                 "first_name": {
@@ -183,8 +187,8 @@
         "tags": [
           "Users"
         ],
-        "summary": "visualizar usuário",
-        "description": "visualiza um usuário",
+        "summary": "Visualizar usuário",
+        "description": "Visualiza um usuário",
         "parameters": [
           {
             "in": "path",
@@ -203,6 +207,383 @@
           },
           "404": {
             "description": "Usuário não encontrado"
+          }
+        }
+      }
+    },
+    "/address": {
+      "post": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Cadastrar endereço",
+        "description": "Cadastra um endereço",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "address",
+            "description": "O endereço a ser registrado.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "user_id",
+                "uf",
+                "cep",
+                "address",
+                "district",
+                "number",
+                "city"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "integer",
+                  "example": 58
+                },
+                "uf": {
+                  "type": "string",
+                  "example": "RN"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "59900000"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "Rua não sei de onde"
+                },
+                "comp": {
+                  "type": "string",
+                  "example": "Complemento"
+                },
+                "district": {
+                  "type": "string",
+                  "example": "São José"
+                },
+                "number": {
+                  "type": "integer",
+                  "example": 0
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Pau dos Ferros"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          }
+        }
+      }
+    },
+    "/address/{addressId}": {
+      "put": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Atualizar endereço",
+        "description": "Atualiza um endereço",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "addressId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador do endereço."
+          },
+          {
+            "in": "body",
+            "name": "endereço",
+            "description": "O endereço a ser criado.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "uf": {
+                  "type": "string",
+                  "example": "RN"
+                },
+                "cep": {
+                  "type": "string",
+                  "example": "59900000"
+                },
+                "address": {
+                  "type": "string",
+                  "example": "Rua não sei de onde"
+                },
+                "comp": {
+                  "type": "string",
+                  "example": "Complemento"
+                },
+                "district": {
+                  "type": "string",
+                  "example": "São José"
+                },
+                "number": {
+                  "type": "integer",
+                  "example": 0
+                },
+                "city": {
+                  "type": "string",
+                  "example": "Pau dos Ferros"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Endereço não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Remover endereço",
+        "description": "Remove um endereço",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "addressId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador do endereço."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Endereço não encontrado"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Visualizar endereço",
+        "description": "Retorna informações de um endereço",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "addressId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador do endereço."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Endereço não encontrado"
+          }
+        }
+      }
+    },
+    "/creditCard": {
+      "post": {
+        "tags": [
+          "Credit Card"
+        ],
+        "summary": "Cadastrar cartão de credito",
+        "description": "Cadastra um cartão de credito",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "creditCard",
+            "description": "Cartão de credito a ser criado.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "user_id",
+                "number_card",
+                "validate_date",
+                "verify_number",
+                "cardholder"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "integer",
+                  "example": 58
+                },
+                "number_card": {
+                  "type": "string",
+                  "example": "5432431387734175"
+                },
+                "validate_date": {
+                  "type": "string",
+                  "example": "2022-05-28"
+                },
+                "verify_number": {
+                  "type": "string",
+                  "example": "579"
+                },
+                "cardholder": {
+                  "type": "string",
+                  "example": "Pedro Lucas"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
+          }
+        }
+      }
+    },
+    "/creditCard/{creditCardId}": {
+      "put": {
+        "tags": [
+          "Credit Card"
+        ],
+        "summary": "Cadastrar cartão de credito",
+        "description": "Cadastra um cartão de credito",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "creditCardId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador do usuário."
+          },
+          {
+            "in": "body",
+            "name": "Credit Card",
+            "description": "Cartão de credito a ser criado.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "number_card": {
+                  "type": "string",
+                  "example": "5432431387734175"
+                },
+                "validate_date": {
+                  "type": "string",
+                  "example": "2022-05-28"
+                },
+                "verify_number": {
+                  "type": "string",
+                  "example": "579"
+                },
+                "cardholder": {
+                  "type": "string",
+                  "example": "Pedro Lucas"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Cartão de credito não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Credit Card"
+        ],
+        "summary": "Remover cartão de credito",
+        "description": "Remove um cartão de credito",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "creditCardId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador do usuário."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Cartão de credito não encontrado"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Credit Card"
+        ],
+        "summary": "Visualizar cartão de credito",
+        "description": "Retorna informações de um cartão de credito",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "creditCardId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador do usuário."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Cartão de credito não encontrado"
           }
         }
       }
