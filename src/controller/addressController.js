@@ -1,29 +1,44 @@
 const Address = require('../model/Address');
 const Users = require('../model/Users');
+const Company = require("../model/Company");
 
 module.exports = {
 
   async create(req, res) {
     const data = req.body;
-    const { user_id } = data;
+    const { user_id, company_id } = data;
 
     try {
-      const user = await Users.findByPk(user_id, {
-        attributes: {
-          exclude: ['password']
-        }
-      });
-
-      if (!user) return res.status(404).json({ error: "User not found" });
+      if(user_id && company_id) return res.status(400).json({ error: "company_id and user_id informed" });
+      else if(user_id) { 
+        const user = await Users.findByPk(user_id, {
+          attributes: {
+            exclude: ['password']
+          }
+        });
+  
+        if (!user) return res.status(404).json({ error: "User not found" });
+      } else if(company_id) {
+        const company = await Company.findByPk(company_id, {
+          attributes: {
+            exclude: ['password']
+          }
+        });
+  
+        if (!company) return res.status(404).json({ error: "Company not found" });
+      } else return res.status(400).json({ error: "company_id or user_id not informed" });
 
       const address = await Address.create({
-        user_id,
+        user_id: user_id || undefined,
+        company_id: company_id || undefined,
         ...data
       });
 
       return res.json(address);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
@@ -39,7 +54,9 @@ module.exports = {
 
       return res.json(address);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
@@ -52,7 +69,9 @@ module.exports = {
 
       return res.json(address);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
@@ -67,7 +86,9 @@ module.exports = {
 
       return res.json({});
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
@@ -83,8 +104,9 @@ module.exports = {
 
       return res.json(address);
     } catch (error) {
-      console.log(error);
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   }
 }

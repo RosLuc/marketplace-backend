@@ -24,7 +24,7 @@ async function verifyEmailAlredyExist(email, props = {}) {
 }
 
 async function cnpjIsValid(cnpj, props) {
-  if (!cnpjValidator.isValid(cnpj)) throw new Error("CPF is Invalid");
+  if (!cnpjValidator.isValid(cnpj)) throw new Error("cnpj is Invalid");
 
   const company = await Company.findOne({
     where: {
@@ -33,7 +33,7 @@ async function cnpjIsValid(cnpj, props) {
     },
   });
 
-  if (user) throw new Error("cpf alredy exist");
+  if (company) throw new Error("cnpj alredy exist");
 }
 
 module.exports = {
@@ -43,86 +43,96 @@ module.exports = {
       await verifyEmailAlredyExist(data.email);
       await cnpjIsValid(data.cnpj);
 
-      const user = await Company.create(data);
-      user.password = undefined;
+      const company = await Company.create(data);
+      company.password = undefined;
 
-      return res.json(user);
+      return res.json(company);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      console.log(error)
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
   async update(req, res) {
     const data = req.body;
-    const { user_id } = req.params;
+    const { company_id } = req.params;
     try {
-      const user = await Company.findByPk(user_id);
+      const company = await Company.findByPk(company_id);
 
-      if (!user) return res.status(404).json({ error: "User not found" });
+      if (!company) return res.status(404).json({ error: "Company not found" });
 
       if (data.email)
-        await verifyEmailAlredyExist(data.email, { id: { [Op.not]: user_id } });
-      if (data.cpf) await cpfIsValid(data.cpf, { cpf: { [Op.not]: data.cpf } });
+        await verifyEmailAlredyExist(data.email, { id: { [Op.not]: company_id } });
+      if (data.cnpj) await cnpjIsValid(data.cnpj, { id: { [Op.not]: company_id } });
 
-      await user.update(data);
+      await company.update(data);
 
-      user.password = undefined;
+      company.password = undefined;
 
-      return res.json(user);
+      return res.json(company);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
   async view(req, res) {
-    const { user_id } = req.params;
+    const { company_id } = req.params;
     try {
-      const user = await Company.findByPk(user_id, {
+      const company = await Company.findByPk(company_id, {
         attributes: {
           exclude: ["password"],
         },
       });
 
-      if (!user) return res.status(404).json({ error: "User not found" });
+      if (!company) return res.status(404).json({ error: "Company not found" });
 
-      return res.json(user);
+      return res.json(company);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
   async delete(req, res) {
-    const { user_id } = req.params;
+    const { company_id } = req.params;
     try {
-      const user = await Company.findByPk(user_id, {
+      const company = await Company.findByPk(company_id, {
         attributes: {
           exclude: ["password"],
         },
       });
 
-      if (!user) return res.status(404).json({ error: "User not found" });
+      if (!company) return res.status(404).json({ error: "Company not found" });
 
-      await user.destroy();
+      await company.destroy();
 
       return res.json({});
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
   async list(req, res) {
     try {
-      const users = await Company.findAll({
+      const company = await Company.findAll({
         attributes: {
           exclude: ["password"],
         },
-        include: [{ association: "Addresses" }, { association: "CreditCards" }],
+        include: [{ association: "Addresses" }, { association: "Account" }],
       });
 
-      return res.json(users);
+      return res.json(company);
     } catch (error) {
-      console.log(error);
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 };

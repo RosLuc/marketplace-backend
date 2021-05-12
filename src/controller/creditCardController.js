@@ -26,8 +26,6 @@ module.exports = {
       console.log(error);
       return res.status(400).json({
         error: error.message,
-        name: error.name || undefined,
-        detail: error.errors[0].message || undefined
       });
     }
   },
@@ -38,13 +36,15 @@ module.exports = {
     try {
       const creditCard = await CreditCard.findByPk(card_id);
 
-      if (!creditCard) return res.status(404).json({ error: "Bank account not found" });
+      if (!creditCard) return res.status(404).json({ error: "Credit card not found" });
 
       await creditCard.update(data);
 
       return res.json(creditCard);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
@@ -53,11 +53,13 @@ module.exports = {
     try {
       const creditCard = await CreditCard.findByPk(card_id);
 
-      if (!creditCard) return res.status(404).json({ error: "Bank account not found" });
+      if (!creditCard) return res.status(404).json({ error: "Credit card not found" });
 
       return res.json(creditCard);
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
@@ -66,13 +68,15 @@ module.exports = {
     try {
       const creditCard = await CreditCard.findByPk(card_id);
 
-      if (!creditCard) return res.status(404).json({ error: "Bank account not found" });
+      if (!creditCard) return res.status(404).json({ error: "Credit card not found" });
 
       await creditCard.destroy();
 
       return res.json({});
     } catch (error) {
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   },
 
@@ -89,7 +93,9 @@ module.exports = {
       return res.json(creditCards);
     } catch (error) {
       console.log(error);
-      return res.status(400).json({ error: error.message });
+      return res.status(400).json({
+        error: error.message,
+      });
     }
   }
 }

@@ -4,7 +4,7 @@ const CreateBody = celebrate({
   [Segments.BODY]: Joi.object().keys({
     user_id: Joi.number(),
     number_card: Joi.string().regex(/[0-9]/).required(),
-    validate_date: Joi.date().iso(),
+    validate_date: Joi.date().iso().required(),
     verify_number: Joi.string().required().regex(/[0-9]{3}/),
     cardholder: Joi.string().required().regex(/[a-zA-Z]{2}/)
   })

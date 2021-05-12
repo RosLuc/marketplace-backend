@@ -5,7 +5,7 @@ class BankAccount extends Model{
     super.init({
       bank: DataTypes.STRING,
       type_account: DataTypes.DATE,
-      legal_person: DataTypes.BOOLEAN,
+      is_legal_person: DataTypes.BOOLEAN,
       cnpj_cpf: DataTypes.STRING,
       name: DataTypes.STRING,
       agency: DataTypes.STRING,

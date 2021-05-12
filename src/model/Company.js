@@ -7,7 +7,7 @@ class Company extends Model{
       fantasy_name: DataTypes.STRING,
       company_name: DataTypes.STRING,
       cnpj: DataTypes.STRING,
-      phone: DataTypes.INTEGER,
+      phone: DataTypes.BIGINT,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
     }, {
