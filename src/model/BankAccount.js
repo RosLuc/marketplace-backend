@@ -19,7 +19,7 @@ class BankAccount extends Model{
   };
 
   static associate(models) {
-    this.belongsTo(models.Users, { foreignKey: 'user_id', as: 'user' });
+    this.belongsTo(models.Company, { foreignKey: 'company_id', as: 'company' });
   };
 };
 

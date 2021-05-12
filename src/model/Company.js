@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 class Company extends Model{
   static init(sequelize) {
@@ -11,12 +12,23 @@ class Company extends Model{
       password: DataTypes.STRING,
     }, {
       tableName: "company",
-      sequelize
+      sequelize,
+      hooks: {
+        beforeCreate: async (users, options) => {
+          const hash = await bcrypt.hash(users.password, 10)
+          users.password = hash;
+        },
+        beforeUpdate: async (users, options) => {
+          const hash = await bcrypt.hash(users.password, 10)
+          users.password = hash;
+        },
+      }
     });
   };
 
   static associate(models) {
-    this.belongsTo(models.Users, { foreignKey: 'user_id', as: 'user' });
+    this.hasMany(models.Address, { foreignKey: "company_id", as: "Addresses" });
+    this.hasMany(models.BankAccount, { foreignKey: "company_id", as: "Account" });
   };
 };
 
