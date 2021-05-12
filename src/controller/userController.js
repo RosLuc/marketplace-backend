@@ -107,7 +107,7 @@ module.exports = {
                 },
                 include: [
                     { association: 'Addresses' },
-                    { association: 'BankAccounts' }
+                    { association: 'CreditCards' }
                 ]
             });
 

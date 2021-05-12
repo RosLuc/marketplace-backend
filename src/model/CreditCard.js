@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
-class BankAccount extends Model{
+class CreditCard extends Model{
   static init(sequelize) {
     super.init({
       number_card: DataTypes.STRING,
@@ -8,7 +8,7 @@ class BankAccount extends Model{
       verify_number: DataTypes.INTEGER,
       cardholder: DataTypes.STRING,
     }, {
-      tableName: "bank_account",
+      tableName: "credit_card",
       sequelize
     });
   };
@@ -18,4 +18,4 @@ class BankAccount extends Model{
   };
 };
 
-module.exports = BankAccount;
+module.exports = CreditCard;
