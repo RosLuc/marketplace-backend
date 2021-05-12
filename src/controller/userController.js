@@ -1,16 +1,26 @@
 const Users = require('../model/Users');
+const Company = require('../model/Company');
 const { cpf: cpfValidator } = require("cpf-cnpj-validator");
 const { Op } = require('sequelize');
 
 async function verifyEmailAlredyExist(email, props = {}) {
-    const user = await Users.findOne({
+    const company = await Company.findOne({
         where: {
             email,
             ...props
         }
     });
 
-    if (user) throw new Error("Email alredy exist");
+    if (company) throw new Error("Email alredy exist");
+
+    const user = await Users.findOne({
+      where: {
+          email,
+          ...props
+      }
+  });
+
+  if (user) throw new Error("Email alredy exist");
 }
 
 async function cpfIsValid(cpf, props) {
