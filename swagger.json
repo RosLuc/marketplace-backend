@@ -8,15 +8,15 @@
   "tags": [
     {
       "name": "Users",
-      "description": "Operations about user"
+      "description": "Operações referentes ao usuário."
     },
     {
       "name": "Addresses",
-      "description": "Operations about address"
+      "description": "Operações referentes ao endereço."
     },
     {
       "name": "Bank Account",
-      "description": "Operations about bank account"
+      "description": "Operações referentes aos cartões de credito"
     }
   ],
   "paths": {
@@ -27,9 +27,55 @@
         ],
         "summary": "Cadastrar usuário",
         "description": "Cadastra um novo usuário",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "O usuário a ser criado.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "userName"
+              ],
+              "properties": {
+                "first_name": {
+                  "type": "string",
+                  "example": "Pedro"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "Santos"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "45397081043"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "algo@dominio.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Pedro123"
+                },
+                "confirm_password": {
+                  "type": "string",
+                  "example": "Pedro123"
+                },
+                "birth_date": {
+                  "type": "string",
+                  "example": "1999-10-25"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Cadastro realizado com sucesso"
+            "description": "Operação realizada com sucesso"
           },
           "400": {
             "description": "Ocorreu uma falha"
@@ -37,16 +83,72 @@
         }
       }
     },
-    "/user/:user_id": {
+    "/user/{userId}": {
       "put": {
         "tags": [
           "Users"
         ],
         "summary": "Atualizar usuário",
         "description": "Atualiza um usuário",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador do usuário."
+          },
+          {
+            "in": "body",
+            "name": "user",
+            "description": "O usuário a ser criado.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "userName"
+              ],
+              "properties": {
+                "first_name": {
+                  "type": "string",
+                  "example": "Pedro"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "Santos"
+                },
+                "cpf": {
+                  "type": "string",
+                  "example": "45397081043"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "algo@dominio.com"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "Pedro123"
+                },
+                "confirm_password": {
+                  "type": "string",
+                  "example": "Pedro123"
+                },
+                "birth_date": {
+                  "type": "string",
+                  "example": "1999-10-25"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Atualização realizada com sucesso"
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
           }
         }
       },
@@ -54,11 +156,26 @@
         "tags": [
           "Users"
         ],
-        "summary": "Atualizar usuário",
-        "description": "Atualiza um usuário",
+        "summary": "Remover usuário",
+        "description": "Remove um usuário",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador do usuário."
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Atualização realizada com sucesso"
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
           }
         }
       },
@@ -66,11 +183,26 @@
         "tags": [
           "Users"
         ],
-        "summary": "Atualizar usuário",
-        "description": "Atualiza um usuário",
+        "summary": "visualizar usuário",
+        "description": "visualiza um usuário",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador do usuário."
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Atualização realizada com sucesso"
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Usuário não encontrado"
           }
         }
       }

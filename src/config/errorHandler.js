@@ -1,4 +1,3 @@
-
 const { isCelebrateError } = require('celebrate');
 
 function error (err, req, res, next) {
