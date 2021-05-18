@@ -587,6 +587,442 @@
           }
         }
       }
+    },
+
+    "/company": {
+      "post": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Cadastrar Empresa",
+        "description": "Cadastra Empresa",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "empresa",
+            "description": "Empresa a ser criado.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "fantasy_name",
+                "company_name",
+                "conpj",
+                "phone",
+                "email",
+                "password"
+              ],
+              "properties": {
+                "fantasy_name": {
+                  "type": "string",
+                  "example": "LTDA"
+                },
+                "company_name": {
+                  "type": "string",
+                  "example": "Theo e Giovanni Limpeza Ltda"
+                },
+                "conpj": {
+                  "type": "string",
+                  "example": "13.990.885/0001-65"
+                },
+                "phone": {
+                  "type": "integer",
+                  "example": 1127170291
+                },
+                "email": {
+                  "type": "string",
+                  "example": "marketing@theoegiovannilimpezaltda.com.br"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "#bt33#k@"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Empresa não encontrado"
+          }
+        }
+      }
+    },
+    "/company/{companyId}": {
+      "put": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Cadastrar Empresa",
+        "description": "Cadastra uma Empresa",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "companyId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador da empresa."
+          },
+          {
+            "in": "body",
+            "name": "Company",
+            "description": "Empresa a ser criado.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "fantasy_name": {
+                  "type": "string",
+                  "example": "LTDA"
+                },
+                "company_name": {
+                  "type": "string",
+                  "example": "Theo e Giovanni Limpeza Ltda"
+                },
+                "cnpj": {
+                  "type": "string",
+                  "example": "13.990.885/0001-65"
+                },
+                "phone": {
+                  "type": "string",
+                  "example": 58445632142
+                },
+                "email": {
+                  "type": "string",
+                  "example": "marketing@theoegiovannilimpezaltda.com.br"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "#bt33#k@"
+                  
+                }, 
+                "confirm_password": {
+                  "type": "string",
+                  "example": "#bt33#k@"
+         
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Empresa não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Remover Empresa",
+        "description": "Remove um cartão de credito",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "companydId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador da empresa."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Empresa não encontrado"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Visualizar da Empresa",
+        "description": "Retorna informações de uma Empresa",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "companydId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador da Empresa."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Empresa não encontrado"
+          }
+        }
+      }
+    },
+
+
+
+    "/bankAccount": {
+      "post": {
+        "tags": [
+          "Bank Account"
+        ],
+        "summary": "Cadastrar Conta Bnacaria",
+        "description": "Cadastra Conta Bnacaria",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Conta Bnacaria",
+            "description": "Conta Bnacaria a ser criado.",
+            "schema": {
+              "type": "object",
+              "required": [
+                "company_id",
+                "bank",
+                "type_account",
+                "is_legal_person",
+                "conpj_cpf",
+                "name",
+                "agency",
+                "agency_digit",
+                "number_account",
+                "account_digit"
+              ],
+              "properties": {
+                "company_id": {
+                  "type": "integer",
+                  "example": 9
+                },
+                "bank": {
+                  "type": "string",
+                  "example": "Bradesco"
+                },
+                "type_account": {
+                  "type": "string",
+                  "example": "Conta Corrente"
+                },
+                "is_legal_person": {
+                  "type": "boolean",
+                  "example": 1
+                },
+                "conpj_cpf": {
+                  "type": "string",
+                  "example": "11338936000"
+                },
+                
+                "name": {
+                  "type": "string",
+                  "example": "Maria Silva"
+                },
+                "agency": {
+                  "type": "integer",
+                  "example": 7895
+                },
+                "agency_digit": {
+                  "type": "integer",
+                  "example": 9
+                },
+                "number_account": {
+                  "type": "integer",
+                  "example": 5592775
+                },
+                "account_digit": {
+                  "type": "integer",
+                  "example": 9
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Conta Bancaria não encontrado"
+          }
+        }
+      }
+    },
+    "/bankAccount/{bankAccountId}": {
+      "put": {
+        "tags": [
+          "BankAccount"
+        ],
+        "summary": "Cadastrar Conta Bancaria",
+        "description": "Cadastra uma Conta Bancaria",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bankAccountId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador da conta bancaria."
+          },
+          {
+            "in": "body",
+            "name": "BankAccount",
+            "description": "Conta Bancaria a ser criado.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bank": {
+                  "type": "string",
+                  "example": "Bradesco"
+                },
+                "type_account": {
+                  "type": "string",
+                  "example": "Conta Corrente"
+                },
+                "is_legal_person": {
+                  "type": "boolean",
+                  "example": 1
+                },
+                "cnpj_cpf": {
+                  "type": "string",
+                  "example": "11338936000"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Maria Silva"
+                },
+                "agency": {
+                  "type": "integer",
+                  "example": 7895
+                  
+                }, 
+                " agency_digit": {
+                  "type": "integer",
+                  "example": 7
+         
+                },
+                "number_account": {
+                  "type": "integer",
+                  "example": 5592775
+         
+                },
+                "account_digit": {
+                  "type": "integer",
+                  "example": 4
+         
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Conta Bancaria não encontrado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "BankAccount"
+        ],
+        "summary": "Remover Conta Bancaria ",
+        "description": "Remove uma Conta Bancaria ",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bankAccoutnId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador da Conta Bancaria."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Conta Bancaria não encontrado"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BankAccount"
+        ],
+        "summary": "Visualizar a Conta Bancaria",
+        "description": "Retorna informações de uma Conta Bancaria",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "bankAccoutnId",
+            "type": "integer",
+            "required": true,
+            "description": "Identificador da Conta Bancaria."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso"
+          },
+          "400": {
+            "description": "Ocorreu uma falha"
+          },
+          "404": {
+            "description": "Empresa não encontrado"
+          }
+        }
+      }
     }
+    
+    
+
   }
 }
