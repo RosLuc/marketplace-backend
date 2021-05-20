@@ -17,6 +17,14 @@
     {
       "name": "Credit Card",
       "description": "Operações referentes aos cartões de credito"
+    },
+    {
+      "name": "Company",
+      "description": "Operações referentes as empresas"
+    },
+    {
+      "name": "Bank Account",
+      "description": "Operações referentes as contas bancarias"
     }
   ],
   "paths": {
@@ -217,7 +225,7 @@
           "Addresses"
         ],
         "summary": "Cadastrar endereço",
-        "description": "Cadastra um endereço",
+        "description": "Para realizar o cadastro deve ser informado o identificador do usuário ou da empresa (user_id ou company_id).",
         "consumes": [
           "application/json"
         ],
@@ -229,7 +237,6 @@
             "schema": {
               "type": "object",
               "required": [
-                "user_id",
                 "uf",
                 "cep",
                 "address",
@@ -241,6 +248,10 @@
                 "user_id": {
                   "type": "integer",
                   "example": 58
+                },
+                "company_id": {
+                  "type": "integer",
+                  "example": 2
                 },
                 "uf": {
                   "type": "string",
@@ -788,9 +799,6 @@
         }
       }
     },
-
-
-
     "/bankAccount": {
       "post": {
         "tags": [
@@ -882,7 +890,7 @@
     "/bankAccount/{bankAccountId}": {
       "put": {
         "tags": [
-          "BankAccount"
+          "Bank Account"
         ],
         "summary": "Cadastrar Conta Bancaria",
         "description": "Cadastra uma Conta Bancaria",
@@ -929,7 +937,7 @@
                   "example": 7895
                   
                 }, 
-                " agency_digit": {
+                "agency_digit": {
                   "type": "integer",
                   "example": 7
          
@@ -962,7 +970,7 @@
       },
       "delete": {
         "tags": [
-          "BankAccount"
+          "Bank Account"
         ],
         "summary": "Remover Conta Bancaria ",
         "description": "Remove uma Conta Bancaria ",
@@ -992,7 +1000,7 @@
       },
       "get": {
         "tags": [
-          "BankAccount"
+          "Bank Account"
         ],
         "summary": "Visualizar a Conta Bancaria",
         "description": "Retorna informações de uma Conta Bancaria",
