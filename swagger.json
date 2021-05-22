@@ -599,7 +599,6 @@
         }
       }
     },
-
     "/company": {
       "post": {
         "tags": [
@@ -715,12 +714,10 @@
                 "password": {
                   "type": "string",
                   "example": "#bt33#k@"
-                  
-                }, 
+                },
                 "confirm_password": {
                   "type": "string",
                   "example": "#bt33#k@"
-         
                 }
               }
             }
@@ -750,7 +747,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "companydId",
+            "name": "companyId",
             "type": "integer",
             "required": true,
             "description": "Identificador da empresa."
@@ -780,10 +777,10 @@
         "parameters": [
           {
             "in": "path",
-            "name": "companydId",
+            "name": "companyId",
             "type": "integer",
             "required": true,
-            "description": "Identificador da Empresa."
+            "description": "Identificador da empresa."
           }
         ],
         "responses": {
@@ -849,7 +846,6 @@
                   "type": "string",
                   "example": "11338936000"
                 },
-                
                 "name": {
                   "type": "string",
                   "example": "Maria Silva"
@@ -935,22 +931,18 @@
                 "agency": {
                   "type": "integer",
                   "example": 7895
-                  
-                }, 
+                },
                 "agency_digit": {
                   "type": "integer",
                   "example": 7
-         
                 },
                 "number_account": {
                   "type": "integer",
                   "example": 5592775
-         
                 },
                 "account_digit": {
                   "type": "integer",
                   "example": 4
-         
                 }
               }
             }
@@ -980,10 +972,10 @@
         "parameters": [
           {
             "in": "path",
-            "name": "bankAccoutnId",
+            "name": "bankAccountId",
             "type": "integer",
             "required": true,
-            "description": "Identificador da Conta Bancaria."
+            "description": "Identificador da conta bancaria."
           }
         ],
         "responses": {
@@ -1010,10 +1002,10 @@
         "parameters": [
           {
             "in": "path",
-            "name": "bankAccoutnId",
+            "name": "bankAccountId",
             "type": "integer",
             "required": true,
-            "description": "Identificador da Conta Bancaria."
+            "description": "Identificador da conta bancaria."
           }
         ],
         "responses": {
@@ -1029,8 +1021,5 @@
         }
       }
     }
-    
-    
-
   }
 }
