@@ -29,6 +29,7 @@ class Company extends Model{
   static associate(models) {
     this.hasMany(models.Address, { foreignKey: "company_id", as: "Addresses" });
     this.hasMany(models.BankAccount, { foreignKey: "company_id", as: "Account" });
+    this.hasMany(models.Product, { foreignKey: "company_id", as: "Product" });
   };
 };
 

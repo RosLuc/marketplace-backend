@@ -5,12 +5,14 @@ const addressController = require("./controller/addressController");
 const creditCardController = require('./controller/creditCardController');
 const companyController = require('./controller/companyController');
 const bankAccountController = require('./controller/bankAccountController');
+const productController = require('./controller/productController');
 
 const userValidator = require("./validators/userValidator");
 const addressValidator = require("./validators/addressValidator");
 const creditCardValidator = require('./validators/creditCardValidator');
 const companyValidator = require('./validators/companyValidator');
 const bankAccountValidator = require('./validators/bankAccountValidator');
+const productValidator = require('./validators/productValidator');
 
 const routes = express.Router();
 
@@ -48,5 +50,12 @@ routes.get('/bankAccount/list/:company_id', bankAccountController.list);
 routes.get('/bankAccount/:account_id', bankAccountController.view);
 routes.put('/bankAccount/:account_id', bankAccountValidator.UpdateBody, bankAccountController.update);
 routes.delete('/bankAccount/:account_id', bankAccountController.delete);
+
+//Product Routes
+routes.post('/product', productValidator.CreateBody, productController.create);
+routes.get('/product/list/:company_id', productController.list);
+routes.get('/product/:product_id', productController.view);
+routes.put('/product/:product_id', productValidator.UpdateBody, productController.update);
+routes.delete('/product/:product_id', productController.delete);
 
 module.exports = routes;
