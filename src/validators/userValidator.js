@@ -8,7 +8,7 @@ const CreateBody = celebrate({
     email: Joi.string().email().required(),
     password: Joi.string().regex(/^(?=(?:.*?[0-9]){1})(?=(?:.*?[a-zA-Z!@#$%*()_+^&}{:;?.]){1})(?!.*\s)[0-9a-zA-Z!@#$%;*(){}_+^&]{8}/).required(),
     confirm_password: Joi.string().required().valid(Joi.ref('password')).messages({ 'any.only': 'Passwords does not match' }),
-    birth_date: Joi.date().iso(),
+    birth_date: Joi.date(),
   })
 });
 
@@ -20,7 +20,7 @@ const UpdateBody = celebrate({
     email: Joi.string().email(),
     password: Joi.string().regex(/^(?=(?:.*?[0-9]){1})(?=(?:.*?[a-zA-Z!@#$%*()_+^&}{:;?.]){1})(?!.*\s)[0-9a-zA-Z!@#$%;*(){}_+^&]{8}/),
     confirm_password: Joi.string().valid(Joi.ref('password')).messages({ 'any.only': 'Passwords does not match' }),
-    birth_date: Joi.date().iso(),
+    birth_date: Joi.date(),
   })
 });
 
